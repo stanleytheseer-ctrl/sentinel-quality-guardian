@@ -153,6 +153,22 @@ const Index = () => {
                   <VerdictBadge verdict={result.verdict} />
                 </div>
 
+                {/* Gate Failures */}
+                {result.gateFailures.length > 0 && (
+                  <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-5 space-y-3">
+                    <h3 className="text-xs font-semibold text-destructive uppercase tracking-wider">Gate Failures</h3>
+                    {result.gateFailures.map((f, i) => (
+                      <div key={i} className="flex items-start gap-2 text-sm">
+                        <span className={`mt-0.5 h-2 w-2 shrink-0 rounded-full ${f.forced === "REJECT" ? "bg-destructive" : "bg-warning"}`} />
+                        <div>
+                          <span className="font-mono text-xs text-muted-foreground">{f.gate}</span>
+                          <p className="text-secondary-foreground">{f.reason}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* Breakdown */}
                 <div className="rounded-lg border border-border bg-card p-5 space-y-4">
                   <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Score Breakdown</h3>
